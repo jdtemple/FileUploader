@@ -61,6 +61,7 @@ namespace FileUploader.Controllers
         var upload = new Upload
         {
           Extension = Path.GetExtension(fileBase.FileName),
+          Subfolder = UploadHelper.GetUploadSubfolder(),
           Title = Path.GetFileNameWithoutExtension(fileBase.FileName),
           UploadType = UploadType.BudgetJustification
         };

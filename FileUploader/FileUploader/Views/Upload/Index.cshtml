@@ -44,6 +44,7 @@
       <tr>
         <th>Id</th>
         <th>Extension</th>
+        <th>Subfolder</th>
         <th>Title</th>
         <th>Upload Type</th>
       </tr>
@@ -54,6 +55,7 @@
         <tr>
           <td>@Html.DisplayFor(x => i.Id)</td>
           <td>@Html.DisplayFor(x => i.Extension)</td>
+          <td>@Html.DisplayFor(x => i.Subfolder)</td>
           <td>@Html.DisplayFor(x => i.Title)</td>
           <td>@TypeHelper.GetDisplayName(i.UploadType)</td>
         </tr>
