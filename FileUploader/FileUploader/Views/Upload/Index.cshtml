@@ -47,6 +47,7 @@
         <th>Subfolder</th>
         <th>Title</th>
         <th>Upload Type</th>
+        <th>Download</th>
       </tr>
     </thead>
     <tbody>
@@ -58,6 +59,9 @@
           <td>@Html.DisplayFor(x => i.Subfolder)</td>
           <td>@Html.DisplayFor(x => i.Title)</td>
           <td>@TypeHelper.GetDisplayName(i.UploadType)</td>
+          <td>
+            <button class="btn btn-default glyphicon glyphicon-circle-arrow-down" onclick="location.href='@Url.Action("Download", "Upload", new { id = i.Id })'" />
+          </td>
         </tr>
       }
     </tbody>

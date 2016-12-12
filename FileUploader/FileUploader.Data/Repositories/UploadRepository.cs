@@ -64,5 +64,18 @@ namespace FileUploader.Data.Repositories
         return entity;
       }
     }
+
+    public Upload Get(int id)
+    {
+      if (id <= 0)
+      {
+        throw new Exception("id must be greater than 0");
+      }
+
+      using (var db = new FileUploaderContext())
+      {
+        return db.Uploads.Single(x => x.Id == id);
+      }
+    }
   }
 }

@@ -79,5 +79,25 @@ namespace FileUploader.Controllers
       
       return RedirectToAction("Index");
     }
+
+    public ActionResult Download(int id)
+    {
+      var repo = new UploadRepository();
+
+      var upload = repo.Get(id);
+      var uploadLocation = repo.GetUploadLocation(upload.Id);
+      var downloadPath = UploadHelper.GetDownloadPath(uploadLocation, 
+        upload.Id, 
+        upload.Subfolder, 
+        upload.Extension);
+
+      UploadHelper.DownloadFile(System.Web.HttpContext.Current,
+        downloadPath, 
+        upload.Id, 
+        upload.Title, 
+        upload.Extension);
+
+      return null;
+    }
   }
 }
