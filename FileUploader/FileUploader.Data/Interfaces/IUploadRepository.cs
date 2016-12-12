@@ -5,6 +5,8 @@ namespace FileUploader.Data.Interfaces
 {
   public interface IUploadRepository
   {
+    Upload Get(int id);
+
     List<Upload> GetAll();
 
     List<UploadLocation> GetLocations();
