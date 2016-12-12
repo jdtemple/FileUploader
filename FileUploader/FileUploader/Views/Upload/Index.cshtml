@@ -1,7 +1,65 @@
-﻿@{
+﻿@model FileUploader.Data.ViewModels.UploadIndexViewModel
+
+@using FileUploader.Data.Types
+
+@{
   ViewBag.Title = "Upload Stuff";
 }
 
+@Html.ActionLink("Upload Something", "New", "Upload", null, new { @class = "btn btn-success" })
+
+<div class="form-group">
+  <h3><label class="label label-primary">Upload Locations</label></h3>
+</div>
+
 <div class="row">
-  YEAH
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Path</th>
+        <th>StartId</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var i in Model.UploadLocationViewModels)
+      {
+        <tr>
+          <td>@Html.DisplayFor(x => i.Id)</td>
+          <td>@Html.DisplayFor(x => i.Path)</td>
+          <td>@Html.DisplayFor(x => i.StartId)</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<div class="form-group">
+  <h3><label class="label label-primary">Uploads</label></h3>
+</div>
+
+<div class="row">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Extension</th>
+        <th>Subfolder</th>
+        <th>Title</th>
+        <th>Upload Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var i in Model.UploadViewModels)
+      {
+        <tr>
+          <td>@Html.DisplayFor(x => i.Id)</td>
+          <td>@Html.DisplayFor(x => i.Extension)</td>
+          <td>@Html.DisplayFor(x => i.Subfolder)</td>
+          <td>@Html.DisplayFor(x => i.Title)</td>
+          <td>@TypeHelper.GetDisplayName(i.UploadType)</td>
+        </tr>
+      }
+    </tbody>
+  </table>
 </div>

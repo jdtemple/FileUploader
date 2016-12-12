@@ -6,8 +6,8 @@ namespace FileUploader.Data.Models
   public class Upload : Entity
   {
     public string Extension { get; set; }
-
-    public string Note { get; set; }
+    
+    public string Subfolder { get; set; }
 
     public string Title { get; set; }
 
