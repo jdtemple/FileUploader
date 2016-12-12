@@ -9,9 +9,15 @@
   <div class="form-group">
     <input type="file" multiple="multiple" class="btn btn-xs btn-default"name="BudgetJustificationUploads" id="BudgetJustificationUploads"/>
   </div>
+  
+  <div class="form-group">
+    <h3><label class="label label-primary">Narrative</label></h3>
+  </div>
 
-  @Html.DisplayFor(x => x.BudgetJustificationUploads)
-
+  <div class="form-group">
+    <input type="file" multiple="multiple" class="btn btn-xs btn-default" name="NarrativeUploads" id="NarrativeUploads" />
+  </div>
+  
   <div class="form-group">
     <button class="btn btn-success" type="submit">Save</button>
   </div>

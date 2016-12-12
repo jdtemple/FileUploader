@@ -6,6 +6,7 @@ using FileUploader.Data.Types;
 using FileUploader.Data.ViewModels;
 using System.Collections.Generic;
 using System.IO;
+using System.Web;
 using System.Web.Mvc;
 
 namespace FileUploader.Controllers
@@ -51,11 +52,19 @@ namespace FileUploader.Controllers
     public ActionResult Edit(UploadEditViewModel model)
     {
       var repo = new UploadRepository();
-
+      
       //BudgetJustificationUploads
-      var budgetJustifications = model.BudgetJustificationUploads;
-            
-      foreach (var fileBase in budgetJustifications)
+      SaveFileCollection(repo, model.BudgetJustificationUploads, UploadType.BudgetJustification);
+
+      //NarrativeUploads
+      SaveFileCollection(repo, model.NarrativeUploads, UploadType.Narrative);
+
+      return RedirectToAction("Index");
+    }
+
+    private void SaveFileCollection(UploadRepository repo, IEnumerable<HttpPostedFileBase> fileBases, UploadType uploadType)
+    {
+      foreach (var fileBase in fileBases)
       {
         //make the upload db entry
         var upload = new Upload
@@ -63,21 +72,19 @@ namespace FileUploader.Controllers
           Extension = Path.GetExtension(fileBase.FileName),
           Subfolder = UploadHelper.GetUploadSubfolder(),
           Title = Path.GetFileNameWithoutExtension(fileBase.FileName),
-          UploadType = UploadType.BudgetJustification
+          UploadType = uploadType
         };
 
         //save it
         upload = repo.Save(upload);
 
         //now that we have the metadata in the db, go ahead and write the file to disk
-        var destPath = UploadHelper.GetUploadPath(repo.GetUploadLocation(upload.Id), 
-          upload.Id, 
+        var destPath = UploadHelper.GetUploadPath(repo.GetUploadLocation(upload.Id),
+          upload.Id,
           Path.GetExtension(fileBase.FileName));
 
         fileBase.SaveAs(destPath);
       }
-      
-      return RedirectToAction("Index");
     }
 
     public ActionResult Download(int id)
